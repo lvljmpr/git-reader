@@ -23,7 +23,7 @@ curl -H "Authorization: token $GHPAT" "https://api.github.com/repos/$ORG/$REPO/c
 check_err
 while [ true ]; do
   do_work
-  if [ "$END" == "$BASE" ]; then
+  if [ "$PARENT" == "$BASE" ]; then
     break
   fi
 done
