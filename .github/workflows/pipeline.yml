@@ -1,5 +1,7 @@
 name: git-reader demo
-on: [push]
+on:
+  push:
+    branches: [none]
 jobs:
   install-deps:
     runs-on: ubuntu-latest
