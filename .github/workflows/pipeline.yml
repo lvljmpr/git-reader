@@ -1,0 +1,8 @@
+name: git-reader demo
+on: [push]
+jobs:
+  install-deps:
+    runs-on: ubuntu-latest
+    steps:
+      - run: apt-get install -y jq
+      - run: jq -v
