@@ -1,4 +1,6 @@
 {
   "start": "1a2b3c4d",
-  "end": "2b3c4d5e"
+  "end": "2b3c4d5e",
+  "repo": "git-reader",
+  "org": "lvljmpr"
 }
