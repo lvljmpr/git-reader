@@ -6,6 +6,7 @@ if [ $? != 0 ]; then
   apt-get update -y; apt-get install -y jq
 fi
 FINALMSG=''
+curl -H "Authorization: token $GHPAT" "https://api.github.com/repos/$ORG/$REPO/commit/$END"
 function do_work () {
   HEAD=$(curl -H "Authorization: token $GHPAT" "https://api.github.com/repos/$ORG/$REPO/commit/$END")
   MESSAGE=$(echo $HEAD| jq -r '.commit.message')
