@@ -5,7 +5,7 @@ if [ $? != 0 ]; then
   printf "Installing 'jq' as it was not found..."
   apt-get update -y; apt-get install -y jq
 fi
-printf "INF: Running git-reader on SHAs $BASE-->$HEAD on $REPO in $ORG..."
+printf "INF: Running git-reader on SHAs $BASE-->$HEAD on $REPO in $ORG...\n---\n"
 FINALMSG="## CHANGELOG : $ORG/$REPO\n---\n"
 function check_err () {
   if [ "$?" != "0" ]; then
@@ -17,7 +17,7 @@ function do_work () {
   TIP=$(curl -s -H "Authorization: token $GHPAT" "https://api.github.com/repos/$ORG/$REPO/commits/$HEAD")
   MESSAGE=$(echo $TIP| jq -r '.commit.message')
   PARENT=$(echo $TIP| jq -r '.parents[].sha')
-  HEAD=$PARENT
+  HEAD="$PARENT"
   FINALMSG="$FINALMSG\n$MESSAGE\n"
 }
 curl -H "Authorization: token $GHPAT" "https://api.github.com/repos/$ORG/$REPO/commits/$HEAD" > /dev/null 2>&1
