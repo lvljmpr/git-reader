@@ -16,7 +16,9 @@ function check_err () {
 function do_work () {
   TIP=$(curl -s -H "Authorization: token $GHPAT" "https://api.github.com/repos/$ORG/$REPO/commits/$HEAD")
   MESSAGE=$(echo $TIP| jq -r '.commit.message')
+  echo $MESSAGE
   PARENT=$(echo $TIP| jq -r '.parents[].sha')
+  echo $PARENT
   HEAD="$PARENT"
   FINALMSG="$FINALMSG\n$MESSAGE\n"
 }
