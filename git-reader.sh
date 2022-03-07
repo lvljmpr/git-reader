@@ -16,7 +16,7 @@ function do_work () {
   HEAD=$(curl -H "Authorization: token $GHPAT" "https://api.github.com/repos/$ORG/$REPO/commits/$END")
   MESSAGE=$(echo $HEAD| jq -r '.commit.message')
   PARENT=$(echo $HEAD| jq -r '.parents[].sha')
-  END="$PARENT"
+  END=$PARENT
   FINALMSG="$FINALMSG\n---\n$MESSAGE\n"
 }
 curl -H "Authorization: token $GHPAT" "https://api.github.com/repos/$ORG/$REPO/commits/$END" > /dev/null 2>&1
