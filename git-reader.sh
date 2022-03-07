@@ -6,11 +6,19 @@ if [ $? != 0 ]; then
   apt-get update -y; apt-get install -y jq
 fi
 FINALMSG=''
-curl -H "Authorization: token $GHPAT" "https://api.github.com/repos/$ORG/$REPO/commit/$END"
+function check_err () {
+  if [[ "$?" != "0" ]]; then
+    printf "ERR: Could not produce commit list with inputs.json provided."
+    exit 1
+  fi
+}
 function do_work () {
-  HEAD=$(curl -H "Authorization: token $GHPAT" "https://api.github.com/repos/$ORG/$REPO/commit/$END")
+  curl -H "Authorization: token $GHPAT" "https://api.github.com/repos/$ORG/$REPO/commits/$END" > /dev/null 2>&1
+  HEAD=$(curl -H "Authorization: token $GHPAT" "https://api.github.com/repos/$ORG/$REPO/commits/$END")
+  check_err
   MESSAGE=$(echo $HEAD| jq -r '.commit.message')
   PARENT=$(echo $HEAD| jq -r '.parents[].sha')
+  END="$PARENT"
 }
 while [[ "$PARENT" != "$BASE" ]]; do
   FINALMSG="$FINALMSG\n$MESSAGE"
