@@ -5,7 +5,7 @@ if [ $? != 0 ]; then
   printf "Installing 'jq' as it was not found..."
   apt-get update -y; apt-get install -y jq
 fi
-FINALMSG="## CHANGELOG : $ORG/$REPO\n---\n\n"
+FINALMSG="## CHANGELOG : $ORG/$REPO\n"
 function check_err () {
   if [ "$?" != "0" ]; then
     printf "ERR: The start and end SHAs in inputs.json do not appear to be valid."
@@ -21,8 +21,11 @@ function do_work () {
 }
 curl -H "Authorization: token $GHPAT" "https://api.github.com/repos/$ORG/$REPO/commits/$END" > /dev/null 2>&1
 check_err
-while [ "$PARENT" != "$BASE" ]; do
+while [ true ]; do
   do_work
+  if [ "$END" == "$BASE" ]; then
+    break
+  fi
 done
 do_work
 printf "$FINALMSG"
