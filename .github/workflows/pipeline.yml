@@ -6,5 +6,10 @@ jobs:
   install-deps:
     runs-on: ubuntu-latest
     steps:
-      - run: sudo apt-get install -y jq
-      - run: jq --help
+    - uses: actions/checkout@v3
+      with:
+        repository: ''
+        ref: ''
+        token: ''
+    - run: |
+        git-reader.sh
