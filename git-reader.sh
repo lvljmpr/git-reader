@@ -5,6 +5,7 @@ if [ $? != 0 ]; then
   printf "Installing 'jq' as it was not found..."
   apt-get update -y; apt-get install -y jq
 fi
+printf "INF: Running git-reader on SHAs $BASE-->$HEAD on $REPO in $ORG...
 FINALMSG="## CHANGELOG : $ORG/$REPO\n---\n"
 function check_err () {
   if [ "$?" != "0" ]; then
@@ -23,6 +24,7 @@ curl -H "Authorization: token $GHPAT" "https://api.github.com/repos/$ORG/$REPO/c
 check_err
 while [ true ]; do
   do_work
+  printf "Checking $PARENT & $BASE."
   if [ "$PARENT" == "$BASE" ]; then
     break
   fi
