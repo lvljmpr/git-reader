@@ -16,4 +16,5 @@ jobs:
           export END=$(cat ./inputs.json| jq -r '.end')
           export REPO=$(cat ./inputs.json| jq -r '.repo')
           export ORG=$(cat ./inputs.json| jq -r '.org')
+          export GHPAT=${{ env.GHPAT }}
           chmod +x ./git-reader.sh; ./git-reader.sh
