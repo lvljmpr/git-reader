@@ -1,2 +1,2 @@
 #!/bin/bash
-echo 'Test'
+echo "Getting commit messages between $START and $END for $REPO within $ORG..."
