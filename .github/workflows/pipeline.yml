@@ -12,8 +12,8 @@ jobs:
       uses: actions/checkout@v3
     - name: git-reader:do-work
       run: |
-          export START=$(cat ./inputs.json| jq -r '.start')
-          export END=$(cat ./inputs.json| jq -r '.end')
+          export HEAD=$(cat ./inputs.json| jq -r '.start')
+          export BASE=$(cat ./inputs.json| jq -r '.end')
           export REPO=$(cat ./inputs.json| jq -r '.repo')
           export ORG=$(cat ./inputs.json| jq -r '.org')
           export GHPAT=${{ env.GHPAT }}
