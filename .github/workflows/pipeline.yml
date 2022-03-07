@@ -1,15 +1,18 @@
-name: git-reader demo
+name: git-reader_demo
 on:
   push:
     branches: [none]
 jobs:
-  install-deps:
+  git-reader:
+    env:
+      GHPAT: ${{ secrets.GITHUB_TOKEN }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-      with:
-        repository: ''
-        ref: ''
-        token: ''
-    - run: |
-        git-reader.sh
+    - name: do-work
+      run: |
+          export START="$(cat shas.json| jq -r '.start')"
+          export END="$(cat shas.json| jq -r '.end')"
+          export REPO="$(cat shas.json| jq -r '.repo')"
+          export ORG="$(cat shas.json| jq -r '.org')"
+          git-reader.sh
