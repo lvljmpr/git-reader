@@ -14,10 +14,10 @@ function check_err () {
   fi
 }
 function do_work () {
-  HEAD=$(curl -s -H "Authorization: token $GHPAT" "https://api.github.com/repos/$ORG/$REPO/commits/$BASE")
+  HEAD=$(curl -s -H "Authorization: token $GHPAT" "https://api.github.com/repos/$ORG/$REPO/commits/$HEAD")
   MESSAGE=$(echo $HEAD| jq -r '.commit.message')
   PARENT=$(echo $HEAD| jq -r '.parents[].sha')
-  BASE="$PARENT"
+  HEAD="$PARENT"
   FINALMSG="$FINALMSG\n$MESSAGE\n"
 }
 curl -H "Authorization: token $GHPAT" "https://api.github.com/repos/$ORG/$REPO/commits/$BASE" > /dev/null 2>&1
@@ -25,7 +25,7 @@ check_err
 while [ true ]; do
   do_work
   printf "Checking $PARENT & $BASE."
-  if [ "$PARENT" == "$BASE" ]; then
+  if [ "$HEAD" == "$BASE" ]; then
     break
   fi
 done
