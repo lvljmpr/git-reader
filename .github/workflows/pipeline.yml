@@ -4,5 +4,5 @@ jobs:
   install-deps:
     runs-on: ubuntu-latest
     steps:
-      - run: apt-get install -y jq
-      - run: jq -v
+      - run: sudo apt-get install -y jq
+      - run: jq --help
