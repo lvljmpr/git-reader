@@ -5,7 +5,7 @@ if [ $? != 0 ]; then
   printf "Installing 'jq' as it was not found..."
   apt-get update -y; apt-get install -y jq
 fi
-printf "INF: Running git-reader on SHAs $BASE-->$HEAD on $REPO in $ORG...
+printf "INF: Running git-reader on SHAs $BASE-->$HEAD on $REPO in $ORG..."
 FINALMSG="## CHANGELOG : $ORG/$REPO\n---\n"
 function check_err () {
   if [ "$?" != "0" ]; then
