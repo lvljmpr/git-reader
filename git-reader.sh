@@ -5,7 +5,7 @@ if [ $? != 0 ]; then
   echo "Installing 'jq' as it was not found..."
   apt-get update -y; apt-get install -y jq
 fi
-FINALMSG=''
+FINALMSG="## CHANGELOG : $ORG/$REPO\n##########\n\n"
 function check_err () {
   if [[ "$?" != "0" ]]; then
     printf "ERR: Could not produce commit list with inputs.json provided."
@@ -21,14 +21,14 @@ function do_work () {
   END="$PARENT"
 }
 while [[ "$PARENT" != "$BASE" ]]; do
-  FINALMSG="$FINALMSG\n$MESSAGE"
   do_work
+  FINALMSG="$FINALMSG\n$MESSAGE"
 done
 if [[ "$PARENT" == "$BASE" ]]; then
-  FINALMSG="$FINALMSG\n$MESSAGE"
   do_work
   FINALMSG="$FINALMSG\n$MESSAGE"
   do_work
+  FINALMSG="$FINALMSG\n$MESSAGE"
 else
   printf "ERR: Could not produce commit list with inputs.json provided."
   exit 1
