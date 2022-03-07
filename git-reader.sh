@@ -7,8 +7,8 @@ if [ $? != 0 ]; then
 fi
 FINALMSG="## CHANGELOG : $ORG/$REPO\n##########\n\n"
 function check_err () {
-  if [[ "$?" != "0" ]]; then
-    printf "ERR: Could not produce commit list with inputs.json provided."
+  if [ "$?" != "0" ]; then
+    printf "ERR: The start and end SHAs in inputs.json do not appear to be valid."
     exit 1
   fi
 }
@@ -19,16 +19,14 @@ function do_work () {
   MESSAGE=$(echo $HEAD| jq -r '.commit.message')
   PARENT=$(echo $HEAD| jq -r '.parents[].sha')
   END="$PARENT"
+  FINALMSG="$FINALMSG\n$MESSAGE"
 }
-while [[ "$PARENT" != "$BASE" ]]; do
+while [ "$PARENT" != "$BASE" ]; do
   do_work
-  FINALMSG="$FINALMSG\n$MESSAGE"
 done
-if [[ "$PARENT" == "$BASE" ]]; then
+if [ "$PARENT" = "$BASE" ]; then
   do_work
-  FINALMSG="$FINALMSG\n$MESSAGE"
   do_work
-  FINALMSG="$FINALMSG\n$MESSAGE"
 else
   printf "ERR: Could not produce commit list with inputs.json provided."
   exit 1
