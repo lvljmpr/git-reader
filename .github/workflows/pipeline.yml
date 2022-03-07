@@ -15,4 +15,4 @@ jobs:
           export END="$(cat shas.json| jq -r '.end')"
           export REPO="$(cat shas.json| jq -r '.repo')"
           export ORG="$(cat shas.json| jq -r '.org')"
-          git-reader.sh
+          ./git-reader.sh
