@@ -1,7 +1,7 @@
 name: git-reader_demo
 on:
   push:
-    branches: [main]
+    branches: [none]
 jobs:
   git-reader:
     env:
@@ -11,8 +11,8 @@ jobs:
     - uses: actions/checkout@v3
     - name: do-work
       run: |
-          export START="$(cat shas.json| jq -r '.start')"
-          export END="$(cat shas.json| jq -r '.end')"
-          export REPO="$(cat shas.json| jq -r '.repo')"
-          export ORG="$(cat shas.json| jq -r '.org')"
+          export START="$(cat inputs.json| jq -r '.start')"
+          export END="$(cat inputs.json| jq -r '.end')"
+          export REPO="$(cat inputs.json| jq -r '.repo')"
+          export ORG="$(cat inputs.json| jq -r '.org')"
           chmod +x ./git-reader.sh; ./git-reader.sh
