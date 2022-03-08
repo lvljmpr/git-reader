@@ -1,6 +1,6 @@
 {
   "base": "bb2ef30e3bf19dafabee35392cd66dd7b3e46c7d",
-  "head": "99b5648e6d67ca841682cd5d21e4889f69319ea3",
-  "repo": "git-reader",
-  "org": "lvljmpr"
+  "head": "f29656896446c7eb1f5827b8182c0a2f5b00b379",
+  "repo": "terraform-aws-vpc",
+  "org": "terraform-aws-modules"
 }
