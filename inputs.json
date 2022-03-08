@@ -1,5 +1,5 @@
 {
-  "base": "bb2ef30e3bf19dafabee35392cd66dd7b3e46c7d",
+  "base": "3208231178e7274cf1daec6a9c1436760454b523",
   "head": "f29656896446c7eb1f5827b8182c0a2f5b00b379",
   "repo": "terraform-aws-vpc",
   "org": "terraform-aws-modules"
