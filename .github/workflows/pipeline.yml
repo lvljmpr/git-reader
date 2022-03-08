@@ -5,7 +5,7 @@ on:
 jobs:
   git-reader:
     env:
-      GHPAT: ${{ secrets.GITHUB_TOKEN }}
+      GHPAT: ${{ secrets.GHPAT }}
     runs-on: ubuntu-latest
     steps:
     - name: checkout:git-reader
